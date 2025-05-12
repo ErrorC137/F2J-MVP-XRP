@@ -59,20 +59,29 @@
       </div>
 
       <div class="section" id="proofSection">
-        <h2>Submit Proof of Volunteering</h2>
-        <div class="proof-upload">
-          <input type="file" id="proofFile" accept="image/*" style="display: none;">
-          <label for="proofFile" class="upload-label">
-            <span id="fileName">Choose an image (PNG/JPG)</span>
-          </label>
-          <button id="submitProofBtn" disabled>Submit Proof</button>
-        </div>
-        <div id="proofStatus"></div>
-        <div id="previewContainer" style="display: none;">
-          <h4>Preview:</h4>
-          <img id="previewImage" style="max-width: 200px; margin-top: 10px;">
-        </div>
-      </div>
+  <h2>🔒 Proof of Volunteering</h2>
+  <div class="proof-card">
+    <div class="upload-area" id="uploadArea">
+      <input type="file" id="proofFile" accept="image/*, .pdf" hidden>
+      <label for="proofFile" class="upload-label">
+        <img src="upload-icon.svg" class="upload-icon">
+        <span id="fileName">Drag or click to upload proof</span>
+      </label>
+    </div>
+    <div id="previewContainer" class="preview-hidden">
+      <img id="previewImage" class="proof-preview">
+      <button onclick="clearPreview()" class="cancel-btn">✖</button>
+    </div>
+    <div class="proof-meta">
+      <input type="number" id="hours" min="1" placeholder="Hours worked">
+      <button id="submitProofBtn" class="loading-btn" onclick="submitVolunteerTime()">
+        <span class="btn-text">Submit</span>
+        <div class="spinner hidden"></div>
+      </button>
+    </div>
+    <div id="proofStatus" class="status-bubble"></div>
+  </div>
+</div>
     
     <div class="section">
         <h2>🏆 Top Contributors</h2>
