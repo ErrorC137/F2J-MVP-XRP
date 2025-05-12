@@ -100,46 +100,62 @@ input {
     text-align: center;
   }
 
-  .proof-upload {
-    display: flex;
-    gap: 10px;
-    margin: 15px 0;
-  }
-  
-  .upload-label {
-    flex-grow: 1;
-    padding: 10px;
-    border: 2px dashed #ccc;
-    border-radius: 5px;
-    text-align: center;
-    cursor: pointer;
-  }
-  
-  .upload-label:hover {
-    border-color: #4CAF50;
-    background: #f8f8f8;
-  }
-  
-  #submitProofBtn {
-    background: #2196F3;
-    color: white;
-  }
-  
-  #submitProofBtn:disabled {
-    background: #cccccc;
-    cursor: not-allowed;
-  }
-  
-  #proofStatus {
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 4px;
-  }
-  
-  .success {
-    background: #e8f5e9;
-    color: #2e7d32;
-  }
+  .proof-card {
+  border: 2px dashed #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  position: relative;
+}
+
+.upload-area {
+  transition: all 0.3s;
+  padding: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.upload-area:hover {
+  background: #f8f9fa;
+  border-color: #4CAF50;
+}
+
+.upload-icon {
+  width: 60px;
+  opacity: 0.7;
+}
+
+.proof-preview {
+  max-width: 300px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.preview-hidden {
+  display: none;
+}
+
+.loading-btn {
+  position: relative;
+  opacity: 0.9;
+}
+
+.spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #4CAF50;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@keyframes spin {
+  0% { transform: translateY(-50%) rotate(0deg); }
+  100% { transform: translateY(-50%) rotate(360deg); }
+}
   
   .error {
     background: #ffebee;
