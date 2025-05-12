@@ -1,13 +1,26 @@
 export const XRPL_CONFIG = {
-  TESTNET_WS: "wss://s.altnet.rippletest.net:51233",
-  MAINNET_WS: "wss://xrplcluster.com",
+  NETWORK: {
+    TESTNET: {
+      WS: "wss://s.altnet.rippletest.net:51233",
+      EXPLORER: "https://testnet.xrpl.org"
+    },
+    MAINNET: {
+      WS: "wss://xrplcluster.com",
+      EXPLORER: "https://livenet.xrpl.org"
+    }
+  },
   TOKEN: {
-    currency: "F2J",
-    issuer: "rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe",
-    decimals: 6
+    SYMBOL: "F2J",
+    ISSUER: "rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe",
+    DECIMALS: 6,
+    TRUST_LIMIT: "1000000"
   },
   HOOKS: {
-    VALIDATION: "HookHashHere",
-    MINTING: "HookHashHere" 
-  }
+    VALIDATION_HASH: null,  
+    MINTING_HASH: null      
+  },
+  PLATFORM: {
+    WALLET: "rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe"
+  },
+  DEFAULT_ENV: "TESTNET"
 };
