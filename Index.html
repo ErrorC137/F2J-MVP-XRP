@@ -1,92 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free to Joy MVP</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Xumm SDK -->
-    <script src="https://xumm.app/assets/cdn/xumm-2.2.0.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free to Joy</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="global-error"></div>
-    
-    <header class="banner">
-        <img src="logo.png" alt="F2J Logo" class="logo">
-        <div class="wallet-info" id="walletInfo">
-            <div class="wallet-address">🔒 Not Connected</div>
-            <div class="balances">
-                <span class="xrp-balance">XRP: 0.00</span>
-                <span class="f2j-balance">F2J: 0</span>
-            </div>
+  <header class="header">
+    <img src="logo.png" alt="Free to Joy Logo" class="logo">
+    <h1 class="title">Free to Joy</h1>
+    <button id="connectWalletBtn" class="btn-primary">Connect Wallet</button>
+    <div class="wallet-info" id="walletInfo">Wallet not connected</div>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>⏱ Volunteer Time</h2>
+      <div class="input-group">
+        <input type="number" id="hours" placeholder="Hours volunteered" min="0">
+        <button id="submitTimeBtn" class="btn-secondary">Submit</button>
+      </div>
+      <p id="volunteerStatus" class="status"></p>
+    </section>
+
+    <section class="card">
+      <h2>💸 Make a Donation</h2>
+      <div class="input-group">
+        <input type="number" id="donationAmount" placeholder="XRP amount" min="0">
+        <button id="donateBtn" class="btn-secondary">Donate</button>
+      </div>
+      <p id="donationStatus" class="status"></p>
+    </section>
+
+    <section class="card">
+      <h2>🎁 Quick Redeem</h2>
+      <button id="quickRedeemBtn" class="btn-secondary">Redeem 10 F2J for Reward</button>
+      <p id="redemptionStatus" class="status"></p>
+    </section>
+
+    <section class="card">
+      <h2>🎟 Reward Marketplace</h2>
+      <div class="reward-grid" id="rewardCatalog">
+        <div class="reward-item" data-cost="10">
+          <h3>Tutoring Session</h3>
+          <p>Cost: 10 F2J</p>
+          <button class="redeem-btn">Redeem</button>
         </div>
-        <button class="connect-btn" onclick="connectWallet()">Connect Wallet</button>
-    </header>
-
-    <main class="container">
-        <!-- Proof Section -->
-        <section class="card">
-            <h2>⏱ Submit Volunteer Hours</h2>
-            <div class="proof-upload">
-                <input type="file" id="proofFile" accept="image/*, .pdf" hidden>
-                <label for="proofFile" class="upload-area" id="uploadLabel">
-                    <span class="upload-text">📤 Upload Proof</span>
-                </label>
-                <div id="previewContainer" class="hidden">
-                    <img id="previewImage">
-                    <button onclick="clearPreview()" class="icon-btn">🗑</button>
-                </div>
-                <div class="input-group">
-                    <input type="number" id="hours" min="1" placeholder="Hours">
-                    <button id="submitHours" class="primary-btn" onclick="submitVolunteerTime()">
-                        <span class="btn-text">Submit</span>
-                        <div class="spinner"></div>
-                    </button>
-                </div>
-                <div id="proofStatus" class="status-message"></div>
-            </div>
-        </section>
-
-        <!-- Marketplace -->
-        <section class="card">
-            <h2>🏪 Marketplace</h2>
-            <div class="marketplace-controls">
-                <button class="secondary-btn" onclick="loadMarketOffers()">Refresh</button>
-                <button class="primary-btn" onclick="showOfferDialog()">Create Offer</button>
-            </div>
-            <div id="marketplace" class="marketplace-grid"></div>
-        </section>
-
-        <!-- Transaction History -->
-        <section class="card">
-            <h2>📜 Transaction History</h2>
-            <div class="tx-filters">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="Payment">Payments</button>
-                <button class="filter-btn" data-filter="OfferCreate">Offers</button>
-            </div>
-            <div id="txHistory" class="tx-list"></div>
-        </section>
-    </main>
-
-    <!-- Modals -->
-    <dialog id="offerDialog" class="modal">
-        <h3>Create New Offer</h3>
-        <div class="input-group">
-            <label>F2J Amount:</label>
-            <input type="number" id="offerAmount" step="1" min="1">
+        <div class="reward-item" data-cost="5">
+          <h3>Meal Voucher</h3>
+          <p>Cost: 5 F2J</p>
+          <button class="redeem-btn">Redeem</button>
         </div>
-        <div class="input-group">
-            <label>XRP Price:</label>
-            <input type="number" id="xrpPrice" step="0.1" min="0.1">
+        <div class="reward-item" data-cost="20">
+          <h3>Workshop Access</h3>
+          <p>Cost: 20 F2J</p>
+          <button class="redeem-btn">Redeem</button>
         </div>
-        <div class="modal-actions">
-            <button class="secondary-btn" onclick="closeModal()">Cancel</button>
-            <button class="primary-btn" onclick="createMarketOffer()">List Offer</button>
-        </div>
-    </dialog>
+      </div>
+      <div id="rewardStatus" class="status"></div>
+    </section>
 
-    <script src="config.js"></script>
-    <script src="app.js"></script>
+    <section class="card">
+      <h2>📤 Submit Proof of Volunteering</h2>
+      <div class="proof-upload">
+        <input type="file" id="proofFile" accept="image/*" hidden>
+        <label for="proofFile" class="upload-label" id="fileName">Choose an image (PNG/JPG)</label>
+        <button id="submitProofBtn" class="btn-secondary" disabled>Submit Proof</button>
+      </div>
+      <div id="proofStatus" class="status"></div>
+      <div id="previewContainer" class="proof-preview" style="display: none;">
+        <h4>Preview:</h4>
+        <img id="previewImage" style="max-width: 200px; margin-top: 10px;">
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>🏆 Leaderboard</h2>
+      <ul id="leaderboardList" class="leaderboard-list">
+        <li class="leaderboard-loading">Loading leaderboard...</li>
+      </ul>
+    </section>
+
+    <div id="global-error" class="global-error" style="display: none;"></div>
+  </main>
+
+  <footer class="footer">
+    <p>Built on XRPL &mdash; Free to Joy 2025</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/xrpl@2.7.0/build/xrpl-latest-min.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+  <script>
+    document.getElementById('connectWalletBtn').addEventListener('click', connectWallet);
+    document.getElementById('submitTimeBtn').addEventListener('click', submitVolunteerTime);
+    document.getElementById('donateBtn').addEventListener('click', submitDonation);
+    document.getElementById('quickRedeemBtn').addEventListener('click', redeemTokens);
+
+    const fileInput = document.getElementById('proofFile');
+    const fileNameDisplay = document.getElementById('fileName');
+    const submitProofBtn = document.getElementById('submitProofBtn');
+    const previewContainer = document.getElementById('previewContainer');
+    const previewImage = document.getElementById('previewImage');
+
+    fileInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file) {
+        fileNameDisplay.textContent = file.name;
+        previewImage.src = URL.createObjectURL(file);
+        previewContainer.style.display = 'block';
+        submitProofBtn.disabled = false;
+      }
+    });
+  </script>
 </body>
 </html>
